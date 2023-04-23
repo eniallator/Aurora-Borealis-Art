@@ -12,9 +12,12 @@ function centerToTriangle(center, maxY = 1) {
 
 function drawVertices(vertices) {
   ctx.beginPath();
-  vertices.forEach((vertex) =>
-    ctx.lineTo(vertex.x * canvas.width, vertex.y * canvas.height)
-  );
+  ctx.moveTo(vertices[0].x * canvas.width, vertices[0].y * canvas.height);
+  vertices
+    .slice(1)
+    .forEach((vertex) =>
+      ctx.lineTo(vertex.x * canvas.width, vertex.y * canvas.height)
+    );
   ctx.fill();
 }
 
@@ -33,7 +36,7 @@ const mountains = new Monad(mountainCenters)
   .map((arr) =>
     arr.map((center) => ({
       mountain: centerToTriangle(center),
-      snow: centerToTriangle(center, 1 - (1 - center.y) * 0.8),
+      snow: centerToTriangle(center, 1 - (1 - center.y) * 0.7),
     }))
   )
   .value();
@@ -67,6 +70,8 @@ const auroraPath = [
 
 const startTime = new Date().getTime();
 
+const grassHeights = new Array(5).fill().map(() => Math.random() * 0.1 + 0.85);
+
 function draw() {
   ctx.fillStyle = "#0c1445";
   ctx.fillRect(0, 0, canvas.width, canvas.height);
@@ -95,6 +100,18 @@ function draw() {
     ctx.fillStyle = "white";
     drawVertices(snow);
   });
+
+  ctx.fillStyle = "#009A17";
+  ctx.beginPath();
+  ctx.moveTo(canvas.width, canvas.height);
+  ctx.lineTo(0, canvas.height);
+  grassHeights.forEach((height, i) =>
+    ctx.lineTo(
+      (i / (grassHeights.length - 1)) * canvas.width,
+      height * canvas.height
+    )
+  );
+  ctx.fill();
 
   const auroraHeight = 0.2 * canvas.height;
   const getY = (y, noiseOffset) =>
