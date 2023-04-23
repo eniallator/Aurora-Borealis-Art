@@ -61,15 +61,7 @@ input[type="color"]::-webkit-color-swatch {
   margin-bottom: 0.25rem !important;
   display: flex;
   justify-content: start;
-}
-.overlay-btns > button {
-  border-radius: 0;
-}
-.overlay-btns > button:first-child {
-  border-radius: 0.25rem 0 0 0.25rem;
-}
-.overlay-btns > button:last-child {
-  border-radius: 0 0.25rem 0.25rem 0;
+  border-radius: 0.25rem;
 }
 
 canvas {

@@ -4,11 +4,6 @@ const ctx = canvas.getContext("2d");
 if (Mouse != null) {
   window.mouse = new Mouse(canvas);
 }
-const paramConfig = new ParamConfig(
-  "./config.json",
-  document.querySelector("#cfg-outer")
-);
-paramConfig.addCopyToClipboardHandler("#share-btn");
 
 window.onresize = (evt) => {
   const { width, height } = canvas.getBoundingClientRect();

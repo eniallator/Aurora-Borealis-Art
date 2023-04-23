@@ -57,11 +57,11 @@ const stars = new Array(400)
   .map((center) => ({ center, sizeMultiplier: Math.random() }));
 
 const auroraPath = [
-  new Vector(0, mountainCenters[0].y + Math.random() / 8),
+  new Vector(0, mountainCenters[0].y - Math.random() / 15),
   ...mountainCenters.sort((a, b) => a.x - b.x),
   new Vector(
     1,
-    mountainCenters[mountainCenters.length - 1].y + Math.random() / 15
+    mountainCenters[mountainCenters.length - 1].y - Math.random() / 15
   ),
 ].map((center) => new Vector(center.x, 0.1 + center.y / 2));
 
@@ -139,6 +139,4 @@ function draw() {
   requestAnimationFrame(draw);
 }
 
-window.resizeCallback = draw;
-
-paramConfig.onLoad(draw);
+draw();
